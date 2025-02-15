@@ -10,6 +10,7 @@ public class Room : MonoBehaviour
 
     public RoomDataSO roomData;
     public RoomState roomState;
+    public List<Vector2Int> linkTo;
 
     [Header(header:"¹ã²¥")]
     public ObjectEventSO loadRoomEvent;
@@ -18,14 +19,13 @@ public class Room : MonoBehaviour
     {
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
-    private void Start()
-    {
-        SetupRoom(0, 0, roomData);
-    }
+
     private void OnMouseDown()
     {
-        Debug.Log(roomData.roomType);
-        loadRoomEvent.RaiseEvent(roomData, this);
+        //Debug.Log(roomData.roomType);
+        if(roomState == RoomState.Attainable)
+            loadRoomEvent.RaiseEvent(this, this);
+
     }
 
     public void SetupRoom(int column, int line, RoomDataSO roomData)
@@ -34,5 +34,13 @@ public class Room : MonoBehaviour
         this.line = line;
         this.roomData = roomData;
         spriteRenderer.sprite = roomData.roomIcon;
+
+        spriteRenderer.color = roomState switch
+        {
+            RoomState.Locked => new Color(0.5f, 0.5f, 0.5f, 1.0f),
+            RoomState.Visited => new Color(0.5f, 0.8f, 0.5f, 0.5f),
+            RoomState.Attainable => Color.white,
+            _ => throw new System.NotImplementedException(),
+        };
     }
 }
