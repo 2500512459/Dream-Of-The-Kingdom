@@ -46,6 +46,7 @@ MonoBehaviour:
   m_GroupAssets:
   - {fileID: 11400000, guid: cf251c2188e1e844e87337e162da230c, type: 2}
   - {fileID: 11400000, guid: 19862ad93a112a140a88844b7eb2a348, type: 2}
+  - {fileID: 11400000, guid: 231d42adb8922974880f9af6b476fab1, type: 2}
   m_BuildSettings:
     m_CompileScriptsInVirtualMode: 0
     m_CleanupStreamingAssetsAfterBuilds: 1
@@ -87,6 +88,7 @@ MonoBehaviour:
   m_LabelTable:
     m_LabelNames:
     - default
+    - CardData
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: db134a926c52e5449b150002178539a7, type: 2}
