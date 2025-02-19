@@ -23,6 +23,12 @@ public class CardManager : MonoBehaviour
             currentCardLibrary.cardLibraryList.Add(cardData);
         }
     }
+
+    private void OnDisable()
+    {
+        currentCardLibrary.cardLibraryList.Clear();//游戏结束时清空当前卡牌库
+    }
+
     #region 获取项目卡牌生成卡牌池
     /// <summary>
     /// 初始化获得项目所有卡牌数据
@@ -49,9 +55,16 @@ public class CardManager : MonoBehaviour
     }
     #endregion
 
+    /// <summary>
+    /// 抽卡时调用的函数获得卡牌GameObject
+    /// </summary>
+    /// <param name="cardData"></param>
+    /// <returns></returns>
     public GameObject GetCardObject(CardDataSO cardData)
     {
-        return poolTool.GetObjectFromPool();
+        var cardObject = poolTool.GetObjectFromPool();
+        cardObject.transform.localScale = Vector3.zero;//设置卡牌刚抽出来时大小为0
+        return cardObject;
     }
     public void ReturnCardObject(GameObject cardObject)
     {
