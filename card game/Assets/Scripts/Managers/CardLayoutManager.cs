@@ -7,9 +7,18 @@ public class CardLayoutManager : MonoBehaviour
     public bool isHorizontal;//是否水平排列
     public float maxWidth = 7f;//最大宽度
     public float cardSpacing = 2f;//卡片默认间距
+    [Header("弧形参数")]
+    public float angleBetweenCards = 7f;//卡片之间的角度
+    public float radius = 17f;//卡片弧形半径
     public Vector3 centerPoint;//卡牌区域中心点
     [SerializeField]private List<Vector3> cardPositions = new List<Vector3>();//卡片位置
     private List<Quaternion> cardRotations = new List<Quaternion>();//卡片旋转
+
+
+    private void Awake()
+    {
+        centerPoint = isHorizontal? Vector3.up * -4.5f : Vector3.up * -21.5f;
+    }
 
     public CardTransform GetCardTransform(int index, int totalCards)
     {
@@ -33,11 +42,34 @@ public class CardLayoutManager : MonoBehaviour
                 float xPos = 0 - totalWidth / 2 + currentSpacing * i;
 
                 var pos = new Vector3(xPos, centerPoint.y, 0);
-                cardPositions.Add(pos);
-
+                
                 var rotation = Quaternion.identity;//不旋转
+
+                cardPositions.Add(pos);
                 cardRotations.Add(rotation);
             }
         }
+        else
+        {   //未完成角度随卡牌数量变化
+            float cardAngle = (number0fCards - 1) * angleBetweenCards / 2;
+            for (int i = 0; i < number0fCards; i++)
+            {
+                var pos = FanCardPosition(cardAngle - i * angleBetweenCards);
+                
+                var rotation = Quaternion.Euler(0, 0, cardAngle - i * angleBetweenCards);//绕Z轴旋转
+            
+                cardPositions.Add(pos);
+                cardRotations.Add(rotation);
+            }
+        }
+    }
+    //
+    private Vector3 FanCardPosition(float angle)
+    {
+        return new Vector3(
+            centerPoint.x - Mathf.Sin(Mathf.Deg2Rad * angle) * radius,
+            centerPoint.y + Mathf.Cos(Mathf.Deg2Rad * angle) * radius,
+            0
+        );
     }
 }

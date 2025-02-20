@@ -163,10 +163,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05e5b80b1e8149a4fa4b8d4dbf536e6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isHorizontal: 1
+  isHorizontal: 0
   maxWidth: 7
   cardSpacing: 2
-  centerPoint: {x: 0, y: -4.5, z: 0}
+  angleBetweenCards: 7
+  radius: 17
+  centerPoint: {x: 0, y: 1, z: 0}
   cardPositions: []
 --- !u!1 &191558744
 GameObject:
@@ -199,6 +201,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardManager: {fileID: 2112204345}
   cardLayoutManager: {fileID: 137430421}
+  deckPosition: {x: 0, y: 0, z: 0}
   drawDeck: []
   discardDeck: []
   handCardObjectList: []
