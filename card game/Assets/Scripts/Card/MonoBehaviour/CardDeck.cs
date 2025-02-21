@@ -71,16 +71,19 @@ public class CardDeck : MonoBehaviour
             CardTransform cardTransform = cardLayoutManager.GetCardTransform(i, handCardObjectList.Count);
             //currentCard.transform.SetLocalPositionAndRotation(cardTransform.pos, cardTransform.rotation);//设置卡牌的位置和旋转角度(无动画)
 
+            currentCard.isAnimating = true;//设置卡牌正在动画中
+
             //使用DOTween设置卡牌的缩放动画并设置延迟
             currentCard.transform.DOScale(Vector3.one, 0.2f).SetDelay(delay).onComplete = () =>
             {
                 //使用DOTween设置卡牌的抽牌动画
-                currentCard.transform.DOMove(cardTransform.pos, 0.5f);
+                currentCard.transform.DOMove(cardTransform.pos, 0.5f).onComplete = () => currentCard.isAnimating = false;
                 currentCard.transform.DORotateQuaternion(cardTransform.rotation, 0.5f);
             };
             
             //设置卡牌的排序（层序）
             currentCard.GetComponent<SortingGroup>().sortingOrder = i;
+            currentCard.UpdataPositionRotation(cardTransform.pos, cardTransform.rotation);
         }
     }
 }
