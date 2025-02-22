@@ -5,6 +5,9 @@ using UnityEngine.EventSystems;
 
 public class CardDragHandler : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
+    public GameObject arrowPrefab;  //箭头预设
+    private GameObject currentArrow;//当前箭头
+
     private Card currentCard;
     private bool canMove;//判断是否可以移动
     private bool canExecute;//判断是否可以执行
@@ -21,6 +24,7 @@ public class CardDragHandler : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         switch (currentCard.cardData.cardType)
         {
             case CardType.Attack:
+                currentArrow = Instantiate(arrowPrefab, transform.position, Quaternion.identity);
                 break;
             case CardType.Abilities:
             case CardType.Defense:
@@ -44,6 +48,9 @@ public class CardDragHandler : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     //结束拖动
     public void OnEndDrag(PointerEventData eventData)
     {
+        if(currentArrow != null)
+            Destroy(currentArrow);
+
         if (canExecute)
         {
 

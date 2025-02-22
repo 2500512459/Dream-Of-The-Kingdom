@@ -13,7 +13,7 @@ public class CardDeck : MonoBehaviour
     public List<CardDataSO> discardDeck = new List<CardDataSO>();// 弃牌堆
     public List<Card> handCardObjectList = new List<Card>();     // 手牌列表
 
-    //测试
+    //测试（开局抽取3张卡牌）
     private void Start()
     {
         InitializeDeck();
@@ -32,6 +32,7 @@ public class CardDeck : MonoBehaviour
         }
 
         //洗牌（改变牌序)
+        ShuffleDeck();
     }
 
     [ContextMenu("测试抽牌")]
@@ -62,7 +63,10 @@ public class CardDeck : MonoBehaviour
         
     }
 
-    //设置卡牌位置
+    /// <summary>
+    /// 设置卡牌布局
+    /// </summary>
+    /// <param name="delay"></param>
     public void SetCardLayout(float delay)
     {
         for (int i = 0; i < handCardObjectList.Count; i++)
@@ -84,6 +88,22 @@ public class CardDeck : MonoBehaviour
             //设置卡牌的排序（层序）
             currentCard.GetComponent<SortingGroup>().sortingOrder = i;
             currentCard.UpdataPositionRotation(cardTransform.pos, cardTransform.rotation);
+        }
+    }
+
+    //洗牌
+    private void ShuffleDeck()
+    {
+        discardDeck.Clear();//清空弃牌堆
+        //TODO:更新UI显示牌堆数量
+
+        //交换顺序
+        for (int i = 0; i < drawDeck.Count; i++)
+        {
+            CardDataSO temp = drawDeck[i];
+            int randomIndex = Random.Range(i, drawDeck.Count);
+            drawDeck[i] = drawDeck[randomIndex];
+            drawDeck[randomIndex] = temp;
         }
     }
 }
