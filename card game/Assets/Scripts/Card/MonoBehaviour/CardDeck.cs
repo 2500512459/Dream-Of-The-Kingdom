@@ -123,14 +123,16 @@ public class CardDeck : MonoBehaviour
     }
 
     /// <summary>
-    /// 弃牌逻辑，事件函数
+    /// 回收卡牌逻辑，事件函数
     /// 弃牌堆中添加卡牌，并移除手牌列表
     /// </summary>
-    /// <param name="card"></param>
-    public void DiscardCard(Card card)
+    /// <param name="obj"></param>
+    public void DiscardCard(object obj)
     {
+        Card card = obj as Card;
         discardDeck.Add(card.cardData);//将卡牌加入到弃牌堆中
         handCardObjectList.Remove(card);//从手牌列表中移除卡牌
+        Debug.Log("弃牌堆中添加了卡牌：" + card.cardData.cardName);
         cardManager.ReturnCardObject(card.gameObject);//将卡牌加入到卡牌对象池中
 
         SetCardLayout(0);

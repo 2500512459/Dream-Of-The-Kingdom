@@ -330,6 +330,7 @@ GameObject:
   m_Component:
   - component: {fileID: 191558746}
   - component: {fileID: 191558745}
+  - component: {fileID: 191558747}
   m_Layer: 0
   m_Name: CardDeck
   m_TagString: Untagged
@@ -370,6 +371,34 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &191558747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 191558744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 953e46e616dd99b4bba620d120a0a63f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventSO: {fileID: 11400000, guid: aa13c3b45bc6c9e46a7307ac6c00214f, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 191558745}
+        m_TargetAssemblyTypeName: CardDeck, Assembly-CSharp
+        m_MethodName: DiscardCard
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &237928859
 GameObject:
   m_ObjectHideFlags: 0
@@ -782,7 +811,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1381140120}
-  m_Layer: 0
+  - component: {fileID: 1381140121}
+  m_Layer: 7
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -805,6 +835,20 @@ Transform:
   - {fileID: 76813702}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1381140121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1381140119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c768491e7ff62841bb5fc4b361623e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHp: 80
+  hp: {fileID: 11400000, guid: c20397beed5ea0c43a7228b3172aa344, type: 2}
 --- !u!1 &1467118423
 GameObject:
   m_ObjectHideFlags: 0

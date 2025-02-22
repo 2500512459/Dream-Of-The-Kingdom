@@ -22,7 +22,7 @@ public class CharacterBase : MonoBehaviour
         CurrentHP = MaxHP;
     }
 
-    protected virtual void TakeDamage(int damage)
+    public virtual void TakeDamage(int damage)
     {
         if (CurrentHP > damage)
         {
