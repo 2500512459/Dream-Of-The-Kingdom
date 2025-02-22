@@ -18,8 +18,8 @@ public class PoolTool : MonoBehaviour
             actionOnRelease: (obj) => obj.SetActive(false),
             actionOnDestroy: (obj) => Destroy(obj),
             collectionCheck: false,
-            defaultCapacity: 10,
-            maxSize: 30
+            defaultCapacity: 10,//默认容量，10张卡牌
+            maxSize: 30         //最大容量，30张卡牌
         );
         PreFillPool(10);
     }
