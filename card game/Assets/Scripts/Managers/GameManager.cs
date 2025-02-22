@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     /// 更新房间的监听事件
     /// </summary>
     /// <param name="roomVector"></param>
-    public void UpdateMapLayouData(object value)
+    public void UpdateMapLayoutData(object value)
     {
         var roomVector = (Vector2Int)value;
         //找到点击的房间,将状态改为已访问

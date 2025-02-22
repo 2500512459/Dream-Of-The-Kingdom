@@ -12,6 +12,7 @@ public class BaseEventSOEditor<T> : Editor
         if(baseEventSO == null)
             baseEventSO = (BaseEventSO<T>)target;
     }
+    // œ‘ æ∂©‘ƒ’ﬂ
     public override void OnInspectorGUI()
     {
         base.OnInspectorGUI();

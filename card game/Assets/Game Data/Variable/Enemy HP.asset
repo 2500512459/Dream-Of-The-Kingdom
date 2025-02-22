@@ -9,9 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4785cb607535b840845eecedc3f1296, type: 3}
-  m_Name: afterRoomLoadedEvent
+  m_Script: {fileID: 11500000, guid: 7287103992173064b87ee126e6ddce82, type: 3}
+  m_Name: Enemy HP
   m_EditorClassIdentifier: 
-  description: "\u623F\u95F4\u8FDB\u5165\u540E\u7684\u4E8B\u4EF6\uFF0C\u4F20\u9012Vector2Int
-    \u66F4\u65B0\u5730\u56FE\u623F\u95F4\u72B6\u6001"
-  lastSender: 
+  maxValue: 0
+  currentValue: 0
+  ValueChangedEvent: {fileID: 11400000, guid: fc27611cb7b0deb468904d2c5cbb2972, type: 2}
+  description: "\u654C\u4EBA\u7684HP"
