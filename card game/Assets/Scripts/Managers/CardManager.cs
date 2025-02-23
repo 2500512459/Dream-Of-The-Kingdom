@@ -8,7 +8,7 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 public class CardManager : MonoBehaviour
 {
     public PoolTool poolTool;//卡牌对象池
-    public List<CardDataSO> cardDataList; //游戏中所有的卡牌数据
+    public List<CardDataSO> cardDataList; //所有的卡牌种类
 
     [Header("卡牌库")]
     public CardLibrarySO newGameCardLibrary;//新游戏卡牌库
