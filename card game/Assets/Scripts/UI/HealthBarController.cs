@@ -1,3 +1,4 @@
+using Mono.Cecil.Cil;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -29,7 +30,6 @@ public class HealthBarController : MonoBehaviour
     {
         Rect rect = RuntimePanelUtils.CameraTransformWorldToPanelRect(element.panel, worldPosition, size, Camera.main);
         element.transform.position = rect.position;
-        Debug.Log("HealthBar Position: " + rect.position);
     }
 
     [ContextMenu("Get UI Position")]
@@ -54,6 +54,24 @@ public class HealthBarController : MonoBehaviour
         {
             healthBar.title = $"{currentCharacter.CurrentHP}/{currentCharacter.MaxHP}";
             healthBar.value = currentCharacter.CurrentHP;
+
+            healthBar.RemoveFromClassList("highHealth");
+            healthBar.RemoveFromClassList("mediumHealth");
+            healthBar.RemoveFromClassList("lowHealth");
+
+            var percentage = (float)currentCharacter.CurrentHP / currentCharacter.MaxHP;
+            if (percentage < 0.3f)
+            {
+                healthBar.AddToClassList("lowHealth");
+            }
+            else if (percentage < 0.6f)
+            {
+                healthBar.AddToClassList("mediumHealth");
+            }
+            else
+            {
+                healthBar.AddToClassList("highHealth");
+            }
         }
     }
 }
