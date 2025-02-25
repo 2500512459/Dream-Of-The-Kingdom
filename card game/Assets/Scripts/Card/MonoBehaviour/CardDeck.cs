@@ -13,6 +13,10 @@ public class CardDeck : MonoBehaviour
     public List<CardDataSO> discardDeck = new List<CardDataSO>();// 弃牌堆
     public List<Card> handCardObjectList = new List<Card>();     // 手牌列表
 
+    [Header("广播事件")]
+    public IntEventSO drawCountEvent;
+    public IntEventSO discardCountEvent;
+
     //测试（开局抽取3张卡牌）
     private void Start()
     {
@@ -49,9 +53,6 @@ public class CardDeck : MonoBehaviour
     {
         for (int i = 0; i < amount; i++)
         {
-            //先从抽牌堆中取出一张卡牌再判断抽牌堆是否已经为空
-            CardDataSO cardData = drawDeck[0];
-            drawDeck.RemoveAt(0);
 
             if (drawDeck.Count == 0)
             {
@@ -63,6 +64,11 @@ public class CardDeck : MonoBehaviour
                 //洗牌（改变牌序)
                 ShuffleDeck();
             }
+
+            CardDataSO cardData = drawDeck[0];
+            drawDeck.RemoveAt(0);
+            //更新UI显示牌堆数量
+            drawCountEvent.RaiseEvent(drawDeck.Count, this);
 
             //获取卡牌对象
             var card = cardManager.GetCardObject(cardData).GetComponent<Card>();
@@ -110,8 +116,9 @@ public class CardDeck : MonoBehaviour
     private void ShuffleDeck()
     {
         discardDeck.Clear();//每次洗牌清空弃牌堆
-        //TODO:更新UI显示牌堆数量
-
+        //更新UI显示牌堆数量
+        drawCountEvent.RaiseEvent(drawDeck.Count, this);
+        discardCountEvent.RaiseEvent(discardDeck.Count, this);
         //交换顺序
         for (int i = 0; i < drawDeck.Count; i++)
         {
@@ -134,6 +141,9 @@ public class CardDeck : MonoBehaviour
         handCardObjectList.Remove(card);//从手牌列表中移除卡牌
         Debug.Log("弃牌堆中添加了卡牌：" + card.cardData.cardName);
         cardManager.ReturnCardObject(card.gameObject);//将卡牌加入到卡牌对象池中
+
+        //更新UI数字
+        discardCountEvent.RaiseEvent(discardDeck.Count, this);
 
         SetCardLayout(0);
     }

@@ -18,6 +18,13 @@ public class CardDragHandler : MonoBehaviour, IBeginDragHandler, IEndDragHandler
         currentCard = GetComponent<Card>();//获取当前拖动的卡牌
     }
 
+    private void OnDisable()
+    {
+        //保证洗牌后卡牌的状态重置
+        canMove = false;
+        canExecute = false;
+    }
+
     //开始拖动
     public void OnBeginDrag(PointerEventData eventData)
     {
