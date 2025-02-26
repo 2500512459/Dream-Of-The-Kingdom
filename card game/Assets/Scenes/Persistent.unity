@@ -923,6 +923,9 @@ GameObject:
   - component: {fileID: 1169296753}
   - component: {fileID: 1169296755}
   - component: {fileID: 1169296754}
+  - component: {fileID: 1169296757}
+  - component: {fileID: 1169296756}
+  - component: {fileID: 1169296758}
   m_Layer: 0
   m_Name: GamePlay Panel
   m_TagString: Untagged
@@ -1030,6 +1033,90 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1169296756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1169296750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 953e46e616dd99b4bba620d120a0a63f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventSO: {fileID: 11400000, guid: 964774677a7de8245b606271db481ad1, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1169296753}
+        m_TargetAssemblyTypeName: GamePlayPanel, Assembly-CSharp
+        m_MethodName: OnPlayerTurnBegin
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1169296757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1169296750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 953e46e616dd99b4bba620d120a0a63f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventSO: {fileID: 11400000, guid: a09ea50a560de574690f9f7e79ac4605, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1169296753}
+        m_TargetAssemblyTypeName: GamePlayPanel, Assembly-CSharp
+        m_MethodName: OnEnemyTurnBegin
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1169296758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1169296750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3352dddb274ad7249b12536cefc455a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventSO: {fileID: 11400000, guid: 887d4d61158a5e047a85f8335a6918e8, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1169296753}
+        m_TargetAssemblyTypeName: GamePlayPanel, Assembly-CSharp
+        m_MethodName: UpdataEnergyAmount
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1238746482
 GameObject:
   m_ObjectHideFlags: 0
@@ -1104,6 +1191,8 @@ GameObject:
   - component: {fileID: 1381140121}
   - component: {fileID: 1381140122}
   - component: {fileID: 1381140123}
+  - component: {fileID: 1381140124}
+  - component: {fileID: 1381140125}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -1143,6 +1232,8 @@ MonoBehaviour:
   maxHp: 80
   hp: {fileID: 11400000, guid: c20397beed5ea0c43a7228b3172aa344, type: 2}
   isDead: 0
+  playerMana: {fileID: 11400000, guid: f665d91046a6d5c42918ce6c6ab28acc, type: 2}
+  MaxMana: 3
 --- !u!114 &1381140122
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1172,6 +1263,62 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBarTransform: {fileID: 1789626386}
+--- !u!114 &1381140124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1381140119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 953e46e616dd99b4bba620d120a0a63f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventSO: {fileID: 11400000, guid: 964774677a7de8245b606271db481ad1, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1381140121}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: NewTurn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1381140125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1381140119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3352dddb274ad7249b12536cefc455a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventSO: {fileID: 11400000, guid: ccd3d55e9822ccb46946833f86f520eb, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1381140121}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: UpdataMana
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1467118423
 GameObject:
   m_ObjectHideFlags: 0

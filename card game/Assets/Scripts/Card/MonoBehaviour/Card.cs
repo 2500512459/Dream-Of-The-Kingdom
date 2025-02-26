@@ -19,10 +19,12 @@ public class Card : MonoBehaviour , IPointerEnterHandler, IPointerExitHandler
     public int originalLayerOrder;     //原始层级
 
     public bool isAnimating;//是否在动画中
-
+    public bool isAvailable;//是否可以打出
     public Player player;
+
     [Header("广播事件")]
     public ObjectEventSO discardCardEvent;
+    public IntEventSO costEvent;
     public void Start()
     {
         Init(cardData);
@@ -82,12 +84,21 @@ public class Card : MonoBehaviour , IPointerEnterHandler, IPointerExitHandler
     //执行卡牌
     public void ExecuteCardEffect(CharacterBase from, CharacterBase target)
     {
-        //TODO:减少对应能量，通知回收卡牌
+        //减少对应能量，通知回收卡牌
+        costEvent.RaiseEvent(cardData.cost, this);
         discardCardEvent.RaiseEvent(this, this);
         //执行这张卡牌的所有效果
         foreach (var effect in cardData.effects)
         {
             effect.Execute(from, target);
         }
+    }
+    /// <summary>
+    /// 更新卡牌状态（包括是否可以打出等）
+    /// </summary>
+    public void UpdataCardState()
+    {
+        isAvailable = player.CurrentMana >= cardData.cost;
+        costText.color = isAvailable ? Color.green : Color.red;
     }
 }

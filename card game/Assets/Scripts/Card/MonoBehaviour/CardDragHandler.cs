@@ -28,6 +28,10 @@ public class CardDragHandler : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     //开始拖动
     public void OnBeginDrag(PointerEventData eventData)
     {
+        //判断是否可以打出
+        if (!currentCard.isAvailable)
+            return;
+
         //判断卡牌类型
         switch (currentCard.cardData.cardType)
         {
@@ -45,6 +49,10 @@ public class CardDragHandler : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     //正在拖动
     public void OnDrag(PointerEventData eventData)
     {
+        //判断是否可以打出
+        if (!currentCard.isAvailable)
+            return;
+
         if (canMove)
         {
             currentCard.isAnimating = true;//设置卡牌正在动画中,防止拖动卡牌时卡牌位置被改变
@@ -73,6 +81,10 @@ public class CardDragHandler : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     //结束拖动
     public void OnEndDrag(PointerEventData eventData)
     {
+        //判断是否可以打出
+        if (!currentCard.isAvailable)
+            return;
+
         if(currentArrow != null)
             Destroy(currentArrow);
 

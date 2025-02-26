@@ -100,6 +100,9 @@ public class CardDeck : MonoBehaviour
             CardTransform cardTransform = cardLayoutManager.GetCardTransform(i, handCardObjectList.Count);
             //currentCard.transform.SetLocalPositionAndRotation(cardTransform.pos, cardTransform.rotation);//设置卡牌的位置和旋转角度(无动画)
 
+            //每次卡牌布局重新布局都更新卡牌的状态（包括是否可以打出等）
+            currentCard.UpdataCardState();
+
             currentCard.isAnimating = true;//设置卡牌正在动画中
 
             //使用DOTween设置卡牌的缩放动画并设置延迟
