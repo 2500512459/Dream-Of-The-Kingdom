@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,9 @@ public class GamePlayPanel : MonoBehaviour
     private VisualElement rootElement;
     private Label energyAmountLabel, drawAmountLabel, discardAmountLabel, turnLabel;
     private Button endTurnButton;
+
+    [Header("广播")]
+    public ObjectEventSO playerTurnEnd;
     private void OnEnable()
     {
         rootElement = GetComponent<UIDocument>().rootVisualElement;
@@ -18,10 +22,17 @@ public class GamePlayPanel : MonoBehaviour
         turnLabel = rootElement.Q<Label>("TurnLabel");
         endTurnButton = rootElement.Q<Button>("EndTurn");
 
+        endTurnButton.clicked += OnEndTurnButtenClicked;
+
         energyAmountLabel.text = "0";
         drawAmountLabel.text = "0";
         discardAmountLabel.text = "0";
         turnLabel.text = "游戏开始";
+    }
+
+    private void OnEndTurnButtenClicked()
+    {
+        playerTurnEnd.RaiseEvent(null, this);
     }
 
     public void UpdataDrawAmount(int amount)
