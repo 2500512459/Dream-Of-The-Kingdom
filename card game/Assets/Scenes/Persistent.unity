@@ -1231,6 +1231,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHp: 80
   hp: {fileID: 11400000, guid: c20397beed5ea0c43a7228b3172aa344, type: 2}
+  defense: {fileID: 11400000, guid: 23ef10faab249f4448b271a2cf8eecea, type: 2}
   isDead: 0
   playerMana: {fileID: 11400000, guid: f665d91046a6d5c42918ce6c6ab28acc, type: 2}
   MaxMana: 3
@@ -1275,13 +1276,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 953e46e616dd99b4bba620d120a0a63f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventSO: {fileID: 11400000, guid: 964774677a7de8245b606271db481ad1, type: 2}
+  eventSO: {fileID: 11400000, guid: fa11147412f473443b1757febc7ca3a5, type: 2}
   response:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1381140121}
         m_TargetAssemblyTypeName: Player, Assembly-CSharp
         m_MethodName: NewTurn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1381140121}
+        m_TargetAssemblyTypeName: CharacterBase, Assembly-CSharp
+        m_MethodName: ResetDefense
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

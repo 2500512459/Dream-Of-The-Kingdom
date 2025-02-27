@@ -6,6 +6,7 @@ public class CharacterBase : MonoBehaviour
 {
     public int maxHp;
     public IntVariable hp;
+    public IntVariable defense;
     public int CurrentHP { get => hp.currentValue; set => hp.SetValue(value);}
     public int MaxHP { get => hp.maxValue;}
     protected Animator animator;
@@ -20,14 +21,18 @@ public class CharacterBase : MonoBehaviour
     {
         hp.maxValue = maxHp;
         CurrentHP = MaxHP;
+
+        ResetDefense();
     }
 
     public virtual void TakeDamage(int damage)
     {
+        var currentDamage = (damage - defense.currentValue) >= 0 ? (damage - defense.currentValue) : 0;
+        var currentDefense = (damage - defense.currentValue) >= 0 ? 0 : (defense.currentValue - damage);
+        defense.SetValue(currentDefense);
         if (CurrentHP > damage)
         {
-            CurrentHP -= damage;
-            Debug.Log("µ±Ç°ÑªÁ¿£º" + CurrentHP);
+            CurrentHP -= currentDamage;
         }
         else
         {
@@ -35,5 +40,15 @@ public class CharacterBase : MonoBehaviour
             // ËÀÍö
             isDead = true;
         }
+    }
+
+    public void UpdataDefense(int amount)
+    {
+        var value = defense.currentValue + amount;
+        defense.SetValue(value);
+    }
+    public void ResetDefense()
+    {
+        defense.SetValue(0);
     }
 }

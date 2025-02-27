@@ -10,6 +10,9 @@ public class GamePlayPanel : MonoBehaviour
     private Label energyAmountLabel, drawAmountLabel, discardAmountLabel, turnLabel;
     private Button endTurnButton;
 
+    private VisualElement defenseElement;
+    private Label defenseAmountLabel;
+
     [Header("¹ã²¥")]
     public ObjectEventSO playerTurnEnd;
     private void OnEnable()
