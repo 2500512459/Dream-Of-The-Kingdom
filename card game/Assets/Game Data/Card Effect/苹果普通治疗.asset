@@ -9,10 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7287103992173064b87ee126e6ddce82, type: 3}
-  m_Name: Player HP
+  m_Script: {fileID: 11500000, guid: 07445d1e849828c42bf31d4c37765f8a, type: 3}
+  m_Name: "\u82F9\u679C\u666E\u901A\u6CBB\u7597"
   m_EditorClassIdentifier: 
-  maxValue: 80
-  currentValue: 50
-  ValueChangedEvent: {fileID: 11400000, guid: aef7c6737fd08fa4497c908d85122d0e, type: 2}
-  description: Player HP
+  value: 3
+  targetType: 0

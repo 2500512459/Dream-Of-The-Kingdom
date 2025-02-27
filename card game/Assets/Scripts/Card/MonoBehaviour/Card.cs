@@ -40,8 +40,8 @@ public class Card : MonoBehaviour , IPointerEnterHandler, IPointerExitHandler
         typeText.text = data.cardType switch
         {
             CardType.Attack => "攻击",
-            CardType.Defense => "技能",
-            CardType.Abilities => "防御",
+            CardType.Abilities => "技能",
+            CardType.Defense => "防御",
             _ => throw new System.NotImplementedException(),
         };
         player = GameObject.FindWithTag("Player").GetComponent<Player>();

@@ -9,5 +9,8 @@ public class DefenseEffect : Effect
     {   
         if(EffectTargetType.Self == targetType)
             from.UpdataDefense(value);
+
+        if (EffectTargetType.Target == targetType)
+            target.UpdataDefense(value);
     }
 }
