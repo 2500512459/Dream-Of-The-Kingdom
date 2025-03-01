@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// 角色基类
 public class CharacterBase : MonoBehaviour
 {
     public int maxHp;  // 最大生命值
