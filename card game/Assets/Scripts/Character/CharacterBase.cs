@@ -8,6 +8,7 @@ public class CharacterBase : MonoBehaviour
     public int maxHp;  // 最大生命值
     public IntVariable hp;  // 生命值变量（包含当前值和最大值）
     public IntVariable defense;  // 防御力变量
+    public IntVariable buffRound;
     public int CurrentHP { get => hp.currentValue; set => hp.SetValue(value);}  // 当前生命值
     public int MaxHP { get => hp.maxValue;} // 最大生命值
     protected Animator animator;  // 动画控制器
@@ -15,6 +16,10 @@ public class CharacterBase : MonoBehaviour
 
     public GameObject buff;  // 增益效果对象
     public GameObject debuff;  // 弱化效果对象
+
+    //力量有关
+    public float baseStrength = 1.0f;
+    private float strengthEffect = 0.5f;
 
     // 在Awake中获取组件（如动画控制器）
     protected virtual void Awake()
@@ -27,7 +32,7 @@ public class CharacterBase : MonoBehaviour
     {
         hp.maxValue = maxHp;  // 设置最大生命值
         CurrentHP = MaxHP;  // 初始化当前生命值为最大生命值
-
+        buffRound.currentValue = 0;// 重置buffRound为0
         ResetDefense();  // 重置防御值
     }
 
@@ -75,5 +80,46 @@ public class CharacterBase : MonoBehaviour
         CurrentHP = Mathf.Min(CurrentHP, MaxHP);  // 确保生命值不超过最大生命值
 
         buff.SetActive(true);  // 激活增益效果
+    }
+
+    //
+    public void SetupStrength(int round, bool isPositive)
+    {
+        if (isPositive)
+        {
+            float newStrength = baseStrength + strengthEffect;
+            baseStrength = Mathf.Min(newStrength, 1.5f);//限定最大值
+            buff.SetActive(true);
+        }
+        else
+        {
+            float newStrength = 1 - strengthEffect;
+            baseStrength = Mathf.Max(newStrength, 0.5f);//限定最小值
+            debuff.SetActive(true);
+        }
+
+        var currentRound = buffRound.currentValue + round;
+
+        if (baseStrength == 1)
+        {
+            buffRound.SetValue(0);//和敌人的效果抵消
+        }
+        else
+        {
+            buffRound.SetValue(currentRound);
+        }
+    }
+
+    /// <summary>
+    /// 回合转换事件函数，用于回合结束力量buff的回合数改变
+    /// </summary>
+    public void UpdataStrengthRound()
+    {
+        buffRound.SetValue(buffRound.currentValue - 1);
+        if (buffRound.currentValue <= 0)
+        {
+            buffRound.SetValue(0);
+            baseStrength = 1;
+        }
     }
 }

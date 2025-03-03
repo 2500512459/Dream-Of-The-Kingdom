@@ -958,9 +958,11 @@ MonoBehaviour:
   maxHp: 50
   hp: {fileID: 11400000, guid: 30867c26526b0944690dae6284a99431, type: 2}
   defense: {fileID: 11400000, guid: 9b888a2f5d640974c85edd51b8c30033, type: 2}
+  buffRound: {fileID: 11400000, guid: 56264fc2c01449a45b5caba6a376f2c8, type: 2}
   isDead: 0
   buff: {fileID: 1133540325}
   debuff: {fileID: 1419635086}
+  baseStrength: 1
 --- !u!114 &2025485539
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -974,6 +976,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBarTransform: {fileID: 1195315324}
+  buffSprite: {fileID: 21300000, guid: 810448b82870c45058f8b2de5423274a, type: 3}
+  debuffSprite: {fileID: 21300000, guid: d7f03361f8c0a4e1293a0b3eb59d0320, type: 3}
 --- !u!114 &2025485540
 MonoBehaviour:
   m_ObjectHideFlags: 0

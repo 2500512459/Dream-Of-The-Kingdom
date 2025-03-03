@@ -412,6 +412,7 @@ GameObject:
   - component: {fileID: 191558747}
   - component: {fileID: 191558748}
   - component: {fileID: 191558749}
+  - component: {fileID: 191558750}
   m_Layer: 0
   m_Name: CardDeck
   m_TagString: Untagged
@@ -530,6 +531,34 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: CardDeck, Assembly-CSharp
         m_MethodName: OnPlayerTurnEnd
         m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &191558750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 191558744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3352dddb274ad7249b12536cefc455a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventSO: {fileID: 11400000, guid: 8b0ceca7699dcc84d861d8e0086dcd91, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 191558745}
+        m_TargetAssemblyTypeName: CardDeck, Assembly-CSharp
+        m_MethodName: DrawCard
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1407,9 +1436,11 @@ MonoBehaviour:
   maxHp: 80
   hp: {fileID: 11400000, guid: c20397beed5ea0c43a7228b3172aa344, type: 2}
   defense: {fileID: 11400000, guid: 23ef10faab249f4448b271a2cf8eecea, type: 2}
+  buffRound: {fileID: 11400000, guid: 9b3db0af7fdb9734a92c29713f104cd0, type: 2}
   isDead: 0
   buff: {fileID: 1481217672}
   debuff: {fileID: 1320487017}
+  baseStrength: 1
   playerMana: {fileID: 11400000, guid: f665d91046a6d5c42918ce6c6ab28acc, type: 2}
   MaxMana: 3
 --- !u!114 &1381140122
@@ -1441,6 +1472,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBarTransform: {fileID: 1789626386}
+  buffSprite: {fileID: 21300000, guid: 810448b82870c45058f8b2de5423274a, type: 3}
+  debuffSprite: {fileID: 21300000, guid: d7f03361f8c0a4e1293a0b3eb59d0320, type: 3}
 --- !u!114 &1381140124
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1472,6 +1505,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1381140121}
         m_TargetAssemblyTypeName: CharacterBase, Assembly-CSharp
         m_MethodName: ResetDefense
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1381140121}
+        m_TargetAssemblyTypeName: CharacterBase, Assembly-CSharp
+        m_MethodName: UpdataStrengthRound
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

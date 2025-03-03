@@ -7,7 +7,7 @@ using UnityEngine.Experimental.Rendering.RenderGraphModule;
 //卡牌效果抽象类
 public abstract class Effect : ScriptableObject
 {
-    public int value;
+    public int value;// 效果的量（可以是回合，也可以是抽牌数等）
     public EffectTargetType targetType;//效果应用对象（单体/群体）
 
     //执行效果

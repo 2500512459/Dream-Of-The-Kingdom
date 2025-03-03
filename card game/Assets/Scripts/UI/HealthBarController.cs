@@ -13,6 +13,12 @@ public class HealthBarController : MonoBehaviour
     private VisualElement defenseElement;
     private Label defenseAmountLabel;
 
+    [Header("buff相关")]
+    private VisualElement buffElement;
+    private Label buffRound;
+    public Sprite buffSprite;
+    public Sprite debuffSprite;
+
     private void Awake()
     {
         currentCharacter = GetComponent<CharacterBase>();
@@ -23,6 +29,7 @@ public class HealthBarController : MonoBehaviour
         InitHealthBar();
     }
 
+    //目前使用的是Update函数来更新UI，可以选择监听IntVariable事件来更新UI
     private void Update()
     {
         UpdateHealthBar();
@@ -40,13 +47,15 @@ public class HealthBarController : MonoBehaviour
         healthBarDocument = GetComponent<UIDocument>();
         healthBar = healthBarDocument.rootVisualElement.Q<ProgressBar>("HealthBar");
         healthBar.highValue = currentCharacter.MaxHP;
+        MoveToWorldPosition(healthBar, healthBarTransform.position, Vector2.zero);
 
         defenseElement = healthBar.Q<VisualElement>("Defense");
         defenseAmountLabel = defenseElement.Q<Label>("DefenseAmount");
         defenseElement.style.display = DisplayStyle.None;
 
-
-        MoveToWorldPosition(healthBar, healthBarTransform.position, Vector2.zero);
+        buffElement = healthBar.Q<VisualElement>("Buff");
+        buffRound = buffElement.Q<Label>("BuffRound");
+        buffElement.style.display = DisplayStyle.None;
     }
 
     public void UpdateHealthBar()
@@ -83,6 +92,11 @@ public class HealthBarController : MonoBehaviour
             //更新防御力
             defenseElement.style.display = currentCharacter.defense.currentValue > 0 ? DisplayStyle.Flex : DisplayStyle.None;
             defenseAmountLabel.text = currentCharacter.defense.currentValue.ToString();
+
+            //buff回合更新
+            buffElement.style.display = currentCharacter.buffRound.currentValue > 0 ? DisplayStyle.Flex : DisplayStyle.None;
+            buffRound.text = currentCharacter.buffRound.currentValue.ToString();
+            buffElement.style.backgroundImage = currentCharacter.baseStrength > 1 ? new StyleBackground(buffSprite) : new StyleBackground(debuffSprite);
         }
     }
 }
