@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4785cb607535b840845eecedc3f1296, type: 3}
   m_Name: DiscardCardEvent
   m_EditorClassIdentifier: 
-  description: "\u56DE\u6536\u5361\u724C"
+  description: "\u4F7F\u7528\u540E\u56DE\u6536\u5361\u724C"
   lastSender: Card(Clone) (Card)
