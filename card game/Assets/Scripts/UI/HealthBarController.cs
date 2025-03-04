@@ -1,4 +1,5 @@
 using Mono.Cecil.Cil;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -19,9 +20,14 @@ public class HealthBarController : MonoBehaviour
     public Sprite buffSprite;
     public Sprite debuffSprite;
 
+    private Enemy enemy;
+    private VisualElement intentSprite;
+    private Label intentAmount;
+
     private void Awake()
     {
         currentCharacter = GetComponent<CharacterBase>();
+        enemy = GetComponent<Enemy>();
     }
 
     private void Start()
@@ -56,6 +62,10 @@ public class HealthBarController : MonoBehaviour
         buffElement = healthBar.Q<VisualElement>("Buff");
         buffRound = buffElement.Q<Label>("BuffRound");
         buffElement.style.display = DisplayStyle.None;
+
+        intentSprite = healthBar.Q<VisualElement>("Intent");
+        intentAmount = intentSprite.Q<Label>("IntentAmount");
+        intentSprite.style.display = DisplayStyle.None;
     }
 
     public void UpdateHealthBar()
@@ -98,5 +108,29 @@ public class HealthBarController : MonoBehaviour
             buffRound.text = currentCharacter.buffRound.currentValue.ToString();
             buffElement.style.backgroundImage = currentCharacter.baseStrength > 1 ? new StyleBackground(buffSprite) : new StyleBackground(debuffSprite);
         }
+    }
+
+    /// <summary>
+    /// 在玩家回合开始时更新UI
+    /// </summary>
+    public void SetIntentElement()
+    {
+        intentSprite.style.display = DisplayStyle.Flex;
+        intentSprite.style.backgroundImage = new StyleBackground(enemy.currentAction.intentSprite);
+        //判断是否是攻击
+        var value = enemy.currentAction.effect.value;
+        if (enemy.currentAction.effect.GetType() == typeof(DamageEffect))
+        {
+            value = (int)math.round(value * enemy.baseStrength);
+        }
+
+        intentAmount.text = value.ToString();
+    }
+    /// <summary>
+    /// 敌人回合结束后隐藏意图
+    /// </summary>
+    public void HideIntentElement()
+    {
+        intentSprite.style.display = DisplayStyle.None;
     }
 }
