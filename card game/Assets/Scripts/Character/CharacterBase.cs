@@ -36,6 +36,11 @@ public class CharacterBase : MonoBehaviour
         ResetDefense();  // 重置防御值
     }
 
+    protected virtual void Update()
+    {
+        animator.SetBool("isDead", isDead);
+    }
+
     // 受到伤害时的处理
     public virtual void TakeDamage(int damage)
     {
@@ -51,6 +56,7 @@ public class CharacterBase : MonoBehaviour
         if (CurrentHP > damage)
         {
             CurrentHP -= currentDamage;  // 受到伤害后减少生命值
+            animator.SetTrigger("hit");
         }
         else
         {
