@@ -193,4 +193,15 @@ public class CardDeck : MonoBehaviour
         // 更新UI显示弃牌堆数量
         discardCountEvent.RaiseEvent(discardDeck.Count, this);
     }
+
+    public void ReleaseAllCards(object obj)
+    {
+        foreach (var card in handCardObjectList)
+        {
+            cardManager.ReturnCardObject(card.gameObject);
+        }
+
+        handCardObjectList.Clear();
+        InitializeDeck();
+    }
 }

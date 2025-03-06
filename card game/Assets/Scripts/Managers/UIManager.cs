@@ -1,0 +1,54 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class UIManager : MonoBehaviour
+{
+    [Header("面板")]
+    public GameObject gamePlayPanel;
+    public GameObject gameWinPanel;
+    public GameObject gameOverPanel;
+
+    public void OnLoadRoomEvent(object data)
+    {
+        Room currentRoom = data as Room;
+
+        switch (currentRoom.roomData.roomType)
+        {
+            case RoomType.MinorEnemy:
+            case RoomType.EliteEnemy:
+            case RoomType.Boss:
+                gamePlayPanel.SetActive(true);
+                break;
+            case RoomType.Shop:
+                break;
+            case RoomType.Treasure:
+                break;
+            case RoomType.RestRoom:
+                break;
+        }
+    }
+
+    /// <summary>
+    /// 隐藏所有面板（一般在loadmap Event/ Load menu）
+    /// </summary>
+    public void HideAllPanels()
+    {
+        gamePlayPanel.SetActive(false);
+        gameWinPanel.SetActive(false);
+        gameOverPanel.SetActive(false);
+    }
+
+     public void OnGameWinEvent()
+     {
+        gamePlayPanel.SetActive(false);
+        gameOverPanel.SetActive(false);
+        gameWinPanel.SetActive(true);
+     }
+    public void OnGameOverEvent()
+    {
+        gamePlayPanel.SetActive(false);
+        gameWinPanel.SetActive(false);
+        gameOverPanel.SetActive(true);
+    }
+}

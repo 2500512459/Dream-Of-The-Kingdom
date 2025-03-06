@@ -23,6 +23,9 @@ public class CharacterBase : MonoBehaviour
     public float baseStrength = 1.0f;// 基础攻击力倍率
     private float strengthEffect = 0.5f;// 力量增益/减益的数值
 
+    [Header("广播")]
+    public ObjectEventSO characterDeadEvent;
+
     // 在Awake中获取组件（如动画控制器）
     protected virtual void Awake()
     {
@@ -71,6 +74,7 @@ public class CharacterBase : MonoBehaviour
             CurrentHP = 0;  // 死亡时，生命值为0
             // 设置角色为死亡状态
             isDead = true;
+            characterDeadEvent.RaiseEvent(this, this);
         }
     }
 

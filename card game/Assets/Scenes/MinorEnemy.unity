@@ -966,6 +966,7 @@ MonoBehaviour:
   buff: {fileID: 1133540325}
   debuff: {fileID: 1419635086}
   baseStrength: 1
+  characterDeadEvent: {fileID: 11400000, guid: fccd07af192d267469cc3f43b9e0b708, type: 2}
   actionDataSO: {fileID: 11400000, guid: 8268fd35bba336b49b88ab5f63b9e657, type: 2}
   currentAction:
     intentSprite: {fileID: 0}

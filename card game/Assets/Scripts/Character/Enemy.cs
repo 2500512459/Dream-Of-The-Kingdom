@@ -17,30 +17,14 @@ public class Enemy : CharacterBase
     protected Player player;
 
     /// <summary>
-    /// Awake 方法，在对象初始化时调用
-    /// </summary>
-    protected override void Awake()
-    {
-        base.Awake();
-        // 通过标签查找场景中的 Player 组件
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-    }
-
-    /// <summary>
-    /// Start 方法，在游戏开始时调用
-    /// </summary>
-    protected override void Start()
-    {
-        base.Start();
-    }
-
-    /// <summary>
     /// 当玩家回合开始时调用，随机选择敌人的下一个行动
     /// </summary>
     public virtual void OnPlayerTurnBegin()
     {
         var randomIndex = Random.Range(0, actionDataSO.actions.Count);
         currentAction = actionDataSO.actions[randomIndex]; // 随机选择一个行动
+        // 通过标签查找场景中的 Player 组件
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
     }
 
     /// <summary>
