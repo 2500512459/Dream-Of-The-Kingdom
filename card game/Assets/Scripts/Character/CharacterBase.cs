@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// 角色基类
+/// <summary>
+/// 角色基类，包含生命值、防御、Buff 以及基本战斗逻辑
+/// </summary>
 public class CharacterBase : MonoBehaviour
 {
     public int maxHp;  // 最大生命值
@@ -18,8 +20,8 @@ public class CharacterBase : MonoBehaviour
     public GameObject debuff;  // 弱化效果对象
 
     //力量有关
-    public float baseStrength = 1.0f;
-    private float strengthEffect = 0.5f;
+    public float baseStrength = 1.0f;// 基础攻击力倍率
+    private float strengthEffect = 0.5f;// 力量增益/减益的数值
 
     // 在Awake中获取组件（如动画控制器）
     protected virtual void Awake()
@@ -36,12 +38,18 @@ public class CharacterBase : MonoBehaviour
         ResetDefense();  // 重置防御值
     }
 
+    /// <summary>
+    /// Update 方法，每帧更新角色状态（如是否死亡）
+    /// </summary>
     protected virtual void Update()
     {
         animator.SetBool("isDead", isDead);
     }
 
-    // 受到伤害时的处理
+    /// <summary>
+    /// 角色受到伤害时的处理
+    /// </summary>
+    /// <param name="damage">受到的伤害值</param>
     public virtual void TakeDamage(int damage)
     {
         // 计算实际伤害（伤害减去防御值，确保不为负）
@@ -88,7 +96,11 @@ public class CharacterBase : MonoBehaviour
         buff.SetActive(true);  // 激活增益效果
     }
 
-    //
+    /// <summary>
+    /// 设置角色力量 Buff（增益或减益）
+    /// </summary>
+    /// <param name="round">Buff 持续回合数</param>
+    /// <param name="isPositive">是否为正面 Buff（true：增加力量，false：减少力量）</param>
     public void SetupStrength(int round, bool isPositive)
     {
         if (isPositive)
@@ -106,6 +118,7 @@ public class CharacterBase : MonoBehaviour
 
         var currentRound = buffRound.currentValue + round;
 
+        // 如果 Buff 被抵消，回合数归零
         if (baseStrength == 1)
         {
             buffRound.SetValue(0);//和敌人的效果抵消
@@ -122,10 +135,11 @@ public class CharacterBase : MonoBehaviour
     public void UpdataStrengthRound()
     {
         buffRound.SetValue(buffRound.currentValue - 1);
+        // 如果 Buff 回合数归零，重置力量
         if (buffRound.currentValue <= 0)
         {
             buffRound.SetValue(0);
-            baseStrength = 1;
+            baseStrength = 1;// 力量恢复到初始状态
         }
     }
 }

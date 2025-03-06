@@ -13,7 +13,7 @@ public class DamageEffect : Effect
         switch (targetType)
         {
             case EffectTargetType.Target:
-                var damage = (int)math.round(value * from.baseStrength);
+                var damage = (int)math.round(value * from.baseStrength);// 和力量值相乘
                 target.TakeDamage(damage);
                 Debug.Log($"执行了{damage}点伤害");
                 break;
