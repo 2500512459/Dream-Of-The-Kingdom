@@ -54,6 +54,7 @@ public class TurnBaseManager : MonoBehaviour
 
     public void GameStart()
     {
+	//ÓÎÏ·¿ªÊ¼
         isPlayerTurn = true;
         isEnemyTurn = false;
         battleEnd = false;
