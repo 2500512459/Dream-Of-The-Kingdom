@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
@@ -14,6 +15,7 @@ public class CardManager : MonoBehaviour
     public CardLibrarySO newGameCardLibrary;//新游戏卡牌库
     public CardLibrarySO currentCardLibrary;//当前卡牌库（随着游戏发展改变）
 
+    private int previousIndex;
     private void Awake()
     {
         InitializeCardDataList();
@@ -31,7 +33,7 @@ public class CardManager : MonoBehaviour
 
     #region 获取项目卡牌生成卡牌池
     /// <summary>
-    /// 初始化获得项目所有卡牌数据
+    /// 初始化从Addressables中获得项目所有卡牌数据
     /// </summary>
     private void InitializeCardDataList()
     {
@@ -69,5 +71,39 @@ public class CardManager : MonoBehaviour
     public void ReturnCardObject(GameObject cardObject)
     {
         poolTool.ReturnObjectToPool(cardObject);
+    }
+
+    public CardDataSO GetNewCardData()
+    {
+        var randomIndex = 0;
+        do
+        {
+            randomIndex = UnityEngine.Random.Range(0, cardDataList.Count);
+        } while (previousIndex == randomIndex);
+
+        previousIndex = randomIndex;
+        return cardDataList[randomIndex];
+    }
+
+    /// <summary>
+    /// 解锁/添加卡牌
+    /// </summary>
+    /// <param name="newCardData"></param>
+    public void UnlockCard(CardDataSO newCardData)
+    {
+        var newCard = new CardLibraryEntry
+        {
+            cardData = newCardData,
+            amount = 1
+        };
+        if (currentCardLibrary.cardLibraryList.Contains(newCard))
+        {
+            var target = currentCardLibrary.cardLibraryList.Find(t => t.cardData == newCardData);
+            target.amount++;
+        }
+        else
+        {
+            currentCardLibrary.cardLibraryList.Add(newCard);
+        }
     }
 }

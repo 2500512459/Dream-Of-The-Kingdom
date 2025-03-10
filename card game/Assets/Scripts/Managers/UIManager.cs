@@ -8,7 +8,7 @@ public class UIManager : MonoBehaviour
     public GameObject gamePlayPanel;
     public GameObject gameWinPanel;
     public GameObject gameOverPanel;
-
+    public GameObject pickCardPanel;
     public void OnLoadRoomEvent(object data)
     {
         Room currentRoom = data as Room;
@@ -42,13 +42,21 @@ public class UIManager : MonoBehaviour
      public void OnGameWinEvent()
      {
         gamePlayPanel.SetActive(false);
-        gameOverPanel.SetActive(false);
         gameWinPanel.SetActive(true);
      }
     public void OnGameOverEvent()
     {
         gamePlayPanel.SetActive(false);
-        gameWinPanel.SetActive(false);
         gameOverPanel.SetActive(true);
+    }
+
+    public void OnPickCardEvent()
+    {
+        pickCardPanel.SetActive(true);
+    }
+
+    public void OnFinishPickCardEvent()
+    {
+        pickCardPanel.SetActive(false);
     }
 }

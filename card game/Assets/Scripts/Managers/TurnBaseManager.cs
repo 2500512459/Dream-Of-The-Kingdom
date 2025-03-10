@@ -51,7 +51,7 @@ public class TurnBaseManager : MonoBehaviour
             }
         }
     }
-
+    [ContextMenu("游戏开始")]
     public void GameStart()
     {
 	//游戏开始
@@ -100,5 +100,11 @@ public class TurnBaseManager : MonoBehaviour
                 playerObj.SetActive(true);
                 break;
         }
+    }
+
+    public void OnLoadMapEvent()
+    {
+        battleEnd = true;
+        playerObj.SetActive(false);
     }
 }
