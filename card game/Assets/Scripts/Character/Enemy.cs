@@ -32,6 +32,7 @@ public class Enemy : CharacterBase
     /// </summary>
     public virtual void OnEnemyTurnBegin()
     {
+        ResetDefense();// 敌人回合开始时重置防御力
         switch (currentAction.effect.targetType)
         {
             case EffectTargetType.Self:

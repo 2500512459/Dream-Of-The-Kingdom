@@ -35,4 +35,13 @@ public class Player : CharacterBase
             CurrentMana = 0;
         }
     }
+
+    public void NewGame()
+    {
+        isDead = false;
+        CurrentHP = MaxHP;  // 初始化当前生命值为最大生命值
+        buffRound.currentValue = 0;// 重置buffRound为0
+        ResetDefense();  // 重置防御值
+        CurrentMana = MaxMana;//新的回合重置法力值
+    }
 }

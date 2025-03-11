@@ -101,10 +101,18 @@ public class TurnBaseManager : MonoBehaviour
                 break;
         }
     }
-
-    public void OnLoadMapEvent()
+    /// <summary>
+    /// 停止回合制系统 load map/game over
+    /// </summary>
+    /// <param name="obj"></param>
+    public void StopTurnBaseSystem(object obj)
     {
         battleEnd = true;
         playerObj.SetActive(false);
+    }
+
+    public void NewGame()
+    {
+        playerObj.GetComponent<Player>().NewGame();
     }
 }
