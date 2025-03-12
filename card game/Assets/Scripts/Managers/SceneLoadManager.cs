@@ -18,10 +18,10 @@ public class SceneLoadManager : MonoBehaviour
     public ObjectEventSO updataRoomEvent;
 
 
-    private void Start()
+    private void Awake()
     {
         currentRoomVector = Vector2Int.one * -1;
-        LoadMenu();
+        LoadMenu(); //º”‘ÿ≤Àµ•
     }
 
     /// <summary>
