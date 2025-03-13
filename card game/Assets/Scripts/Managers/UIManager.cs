@@ -56,11 +56,13 @@ public class UIManager : MonoBehaviour
 
     public void OnPickCardEvent()
     {
+        Debug.Log("OnPickCardEvent");
         pickCardPanel.SetActive(true);
     }
 
     public void OnFinishPickCardEvent()
     {
+        Debug.Log("OnFinishPickCardEvent");
         pickCardPanel.SetActive(false);
     }
 }

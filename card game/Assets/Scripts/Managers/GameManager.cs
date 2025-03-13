@@ -58,6 +58,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 角色死亡事件
+    /// </summary>
+    /// <param name="character"></param>
     public void OnCharacterDeadEvent(object character)
     {
         if (character is Player)
@@ -74,6 +78,11 @@ public class GameManager : MonoBehaviour
                 //发出胜利的通知
                 StartCoroutine(EventDelayAction(gameWinEvent));
             }
+        }
+
+        if (character is Boss)
+        {
+            StartCoroutine(EventDelayAction(gameOverEvent));
         }
     }
 

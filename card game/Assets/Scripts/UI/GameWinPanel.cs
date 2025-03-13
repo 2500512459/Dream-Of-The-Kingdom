@@ -15,7 +15,7 @@ public class GameWinPanel : MonoBehaviour
     public ObjectEventSO loadMapEvent;
     public ObjectEventSO pickCardEvent;
 
-    private void Awake()
+    private void OnEnable()
     {
         rootElement = GetComponent<UIDocument>().rootVisualElement;
         backToMapButton = rootElement.Q<Button>("BackToMapButton");
@@ -27,11 +27,13 @@ public class GameWinPanel : MonoBehaviour
 
     private void OnPickCardButtonClicked()
     {
+        Debug.Log("OnPickCardButtonClicked");
         pickCardEvent.RaiseEvent(null, this);
     }
 
     private void OnBackToMapButtonClicked()
     {
+        Debug.Log("OnBackToMapButtonClicked");
         loadMapEvent.RaiseEvent(null, this);
     }
 
