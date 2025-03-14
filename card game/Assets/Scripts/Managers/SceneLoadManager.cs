@@ -1,88 +1,102 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.SceneManagement;
+
+/// <summary>
+/// 场景加载管理器，负责处理游戏场景的异步加载/卸载和房间切换逻辑
+/// </summary>
 public class SceneLoadManager : MonoBehaviour
 {
-    private AssetReference currentScene;
-    public AssetReference map;
-    public AssetReference menu;
+    // ---------- 场景资源引用 ----------
+    private AssetReference currentScene;  // 当前加载的场景引用
+    public AssetReference map;           // 地图场景资源引用
+    public AssetReference menu;          // 菜单场景资源引用
 
-    private Vector2Int currentRoomVector;
-    private Room currentRoom;
+    // ---------- 房间数据 ----------
+    private Vector2Int currentRoomVector = Vector2Int.one * -1; // 当前房间坐标（初始值-1,-1）
+    private Room currentRoom;             // 当前房间数据
 
+    // ---------- 事件系统 ----------
     [Header("广播")]
-    public ObjectEventSO afterRoomLoadedEvent;
-    public ObjectEventSO updataRoomEvent;
-
+    public ObjectEventSO afterRoomLoadedEvent; // 房间加载完成事件
+    public ObjectEventSO updataRoomEvent;      // 房间数据更新事件
 
     private void Awake()
     {
-        currentRoomVector = Vector2Int.one * -1;
-        LoadMenu(); //加载菜单
+        LoadMenu(); // 游戏启动时加载菜单场景
     }
 
     /// <summary>
-    /// 在房间加载事件中监听
+    /// 处理房间加载事件
     /// </summary>
-    /// <param name="data"></param>
+    /// <param name="data">包含Room类型数据的参数</param>
     public async void OnLoadRoomEvent(object data)
     {
-        if (data is Room)
+        if (data is Room targetRoom)
         {
-            currentRoom = data as Room;
-
-            var currentData = currentRoom.roomData;
-            currentRoomVector = new(currentRoom.column, currentRoom.line);
-
-            currentScene = currentData.sceneToLoad;
+            currentRoom = targetRoom;
+            currentRoomVector = new Vector2Int(targetRoom.column, targetRoom.line);
+            currentScene = targetRoom.roomData.sceneToLoad;
         }
-        await UnloadSceneTask();
-        //加载房间
-        await LoadSceneTask();
 
+        await UnloadSceneTask();  // 先卸载当前场景
+        await LoadSceneTask();     // 加载新场景
+
+        // 广播房间加载完成事件
         afterRoomLoadedEvent.RaiseEvent(currentRoom, this);
     }
+
     /// <summary>
-    /// 异步操作加载场景
+    /// 异步加载当前场景
     /// </summary>
-    /// <returns></returns>
     private async Awaitable LoadSceneTask()
     {
-        var s = currentScene.LoadSceneAsync(LoadSceneMode.Additive);
-        await s.Task;
+        AsyncOperationHandle<SceneInstance> sceneHandle = currentScene.LoadSceneAsync(
+            LoadSceneMode.Additive,
+            activateOnLoad: true
+        );
 
-        if (s.Status == AsyncOperationStatus.Succeeded)
+        await sceneHandle.Task;
+
+        if (sceneHandle.Status == AsyncOperationStatus.Succeeded)
         {
-            SceneManager.SetActiveScene(s.Result.Scene);
+            SceneManager.SetActiveScene(sceneHandle.Result.Scene);
         }
     }
 
+    /// <summary>
+    /// 异步卸载当前活动场景
+    /// </summary>
     private async Awaitable UnloadSceneTask()
     {
-        await SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
-        
+        Scene activeScene = SceneManager.GetActiveScene();
+        if (activeScene.isLoaded)
+        {
+            await SceneManager.UnloadSceneAsync(activeScene);
+        }
     }
 
     /// <summary>
-    /// 监听返回地图中的事件函数
+    /// 加载地图场景并更新房间坐标
     /// </summary>
     public async void LoadMap()
     {
         await UnloadSceneTask();
 
+        // 如果存在有效房间坐标则广播更新
         if (currentRoomVector != Vector2Int.one * -1)
         {
             updataRoomEvent.RaiseEvent(currentRoomVector, this);
         }
 
         currentScene = map;
-
         await LoadSceneTask();
     }
 
+    /// <summary>
+    /// 加载菜单场景
+    /// </summary>
     public async void LoadMenu()
     {
         if (currentScene != null)
