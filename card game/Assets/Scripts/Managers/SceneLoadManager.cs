@@ -48,20 +48,17 @@ public class SceneLoadManager : MonoBehaviour
     }
 
     /// <summary>
-    /// 异步加载当前场景
+    /// 异步操作加载场景
     /// </summary>
+    /// <returns></returns>
     private async Awaitable LoadSceneTask()
     {
-        AsyncOperationHandle<SceneInstance> sceneHandle = currentScene.LoadSceneAsync(
-            LoadSceneMode.Additive,
-            activateOnLoad: true
-        );
+        var s = currentScene.LoadSceneAsync(LoadSceneMode.Additive);
+        await s.Task;
 
-        await sceneHandle.Task;
-
-        if (sceneHandle.Status == AsyncOperationStatus.Succeeded)
+        if (s.Status == AsyncOperationStatus.Succeeded)
         {
-            SceneManager.SetActiveScene(sceneHandle.Result.Scene);
+            SceneManager.SetActiveScene(s.Result.Scene);
         }
     }
 

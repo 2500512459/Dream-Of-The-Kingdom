@@ -69,8 +69,11 @@ public class GameManager : MonoBehaviour
             //发出失败的通知
             StartCoroutine(EventDelayAction(gameOverEvent));
         }
-
-        if (character is Enemy)
+        if (character is Boss)
+        {
+            StartCoroutine(EventDelayAction(gameOverEvent));// 临时使用gameOverEvent的事件，后续需要更换可以清空牌库的事件
+        }
+        else if (character is Enemy)
         {
             aliveEnemyList.Remove(character as Enemy);
             if (aliveEnemyList.Count == 0)
@@ -80,10 +83,6 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        if (character is Boss)
-        {
-            StartCoroutine(EventDelayAction(gameOverEvent));
-        }
     }
 
     IEnumerator EventDelayAction(ObjectEventSO eventSO)
