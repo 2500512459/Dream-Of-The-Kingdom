@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class SceneLoadManager : MonoBehaviour
 {
+    public FadePanel fadePanel;         // 淡入淡出面板
     // ---------- 场景资源引用 ----------
     private AssetReference currentScene;  // 当前加载的场景引用
     public AssetReference map;           // 地图场景资源引用
@@ -58,6 +59,7 @@ public class SceneLoadManager : MonoBehaviour
 
         if (s.Status == AsyncOperationStatus.Succeeded)
         {
+            fadePanel.FadeOut(0.2f);
             SceneManager.SetActiveScene(s.Result.Scene);
         }
     }
@@ -70,7 +72,9 @@ public class SceneLoadManager : MonoBehaviour
         Scene activeScene = SceneManager.GetActiveScene();
         if (activeScene.isLoaded)
         {
-            await SceneManager.UnloadSceneAsync(activeScene);
+            fadePanel.FadeIn(0.4f);
+            await Awaitable.WaitForSecondsAsync(0.45f);
+            await Awaitable.FromAsyncOperation(SceneManager.UnloadSceneAsync(activeScene));
         }
     }
 

@@ -1,18 +1,27 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UIElements;
+using DG.Tweening;
 public class FadePanel : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private VisualElement background;
+    private void Awake()
     {
-        
+        background = GetComponent<UIDocument>().rootVisualElement.Q<VisualElement>("BackGround");
     }
-
-    // Update is called once per frame
-    void Update()
+    // ³¡¾°Ð¶ÔØ
+    public void FadeIn(float duration)
     {
-        
+        DOVirtual.Float(0, 1, duration, value =>
+        {
+            background.style.opacity = value;
+        }).SetEase(Ease.InQuad);
+    }
+    // ³¡¾°¼ÓÔØ
+    public void FadeOut(float duration)
+    {
+        DOVirtual.Float(1, 0, duration, value =>
+        {
+            background.style.opacity = value;
+        }).SetEase(Ease.InQuad);
     }
 }
