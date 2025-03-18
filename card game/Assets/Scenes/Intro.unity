@@ -1594,6 +1594,7 @@ GameObject:
   m_Component:
   - component: {fileID: 830150628}
   - component: {fileID: 830150629}
+  - component: {fileID: 830150630}
   m_Layer: 0
   m_Name: Intro Director
   m_TagString: Untagged
@@ -1645,8 +1646,26 @@ PlayableDirector:
     value: {fileID: 781557112}
   - key: {fileID: 6059944262377719621, guid: 6fad0bbd43af140d888310101dc8686c, type: 2}
     value: {fileID: 601820529}
+  - key: {fileID: -9039568230073889464, guid: eed18d893b51fd44891e16b44104ed78, type: 2}
+    value: {fileID: 1248737649}
+  - key: {fileID: -8398990805293802585, guid: eed18d893b51fd44891e16b44104ed78, type: 2}
+    value: {fileID: 1018410199}
   m_ExposedReferences:
     m_References: []
+--- !u!114 &830150630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 830150627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b08c1c8b7b9b93488542039c14f2b3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  director: {fileID: 830150629}
+  loadMenuEvent: {fileID: 11400000, guid: 5f4b3ebcdd930cf428653e825c01c203, type: 2}
 --- !u!1 &838800123
 GameObject:
   m_ObjectHideFlags: 0

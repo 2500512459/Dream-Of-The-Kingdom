@@ -13,9 +13,10 @@ public class SceneLoadManager : MonoBehaviour
     private AssetReference currentScene;  // 当前加载的场景引用
     public AssetReference map;           // 地图场景资源引用
     public AssetReference menu;          // 菜单场景资源引用
+    public AssetReference intro;         // 引导场景资源引用
 
     // ---------- 房间数据 ----------
-    private Vector2Int currentRoomVector = Vector2Int.one * -1; // 当前房间坐标（初始值-1,-1）
+    private Vector2Int currentRoomVector;  // 当前房间坐标（初始值-1,-1）
     private Room currentRoom;             // 当前房间数据
 
     // ---------- 事件系统 ----------
@@ -25,7 +26,9 @@ public class SceneLoadManager : MonoBehaviour
 
     private void Awake()
     {
-        LoadMenu(); // 游戏启动时加载菜单场景
+        currentRoomVector = Vector2Int.one * -1; //（初始值 - 1,-1）
+        //LoadMenu(); // 游戏启动时加载菜单场景
+        LoadIntro(); // 游戏启动时加载引导场景
     }
 
     /// <summary>
@@ -105,6 +108,19 @@ public class SceneLoadManager : MonoBehaviour
             await UnloadSceneTask();
         }
         currentScene = menu;
+        await LoadSceneTask();
+    }
+
+    /// <summary>
+    /// 加载引导场景
+    /// </summary>
+    public async void LoadIntro()
+    {
+        if (currentScene != null)
+        {
+            await UnloadSceneTask();
+        }
+        currentScene = intro;
         await LoadSceneTask();
     }
 }

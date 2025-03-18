@@ -365,7 +365,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 953e46e616dd99b4bba620d120a0a63f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventSO: {fileID: 11400000, guid: b054c60e5b3179e4ba793682670d6907, type: 2}
+  eventSO: {fileID: 11400000, guid: aa59e2042430a034caab72f63c439e21, type: 2}
   response:
     m_PersistentCalls:
       m_Calls:
@@ -1787,7 +1787,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 953e46e616dd99b4bba620d120a0a63f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventSO: {fileID: 11400000, guid: b054c60e5b3179e4ba793682670d6907, type: 2}
+  eventSO: {fileID: 11400000, guid: aa59e2042430a034caab72f63c439e21, type: 2}
   response:
     m_PersistentCalls:
       m_Calls:
@@ -2526,6 +2526,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e232dab8591f69443aa15f9a91154688, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fadePanel: {fileID: 311193542}
   map:
     m_AssetGUID: 145042a0ffc9f4d42a32ef7105e33861
     m_SubObjectName: 
@@ -2533,6 +2534,11 @@ MonoBehaviour:
     m_EditorAssetChanged: 0
   menu:
     m_AssetGUID: 6c029ed68e3569744a6e1e97023effac
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  intro:
+    m_AssetGUID: ceb5b4ecb753449bfa333c67d9183401
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
